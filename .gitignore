@@ -12,3 +12,4 @@ docs/_build/
 .pytest_cache
 ldt.egg-info
 dist
+data

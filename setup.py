@@ -6,8 +6,6 @@ import codecs
 import os
 import sys
 
-import ldt
-
 here = os.path.abspath(os.path.dirname(__file__))
 
 packages = find_packages(here, exclude=["*.tests", "*.tests.*", "tests.*", "tests"])
@@ -37,7 +35,7 @@ class PyTest(TestCommand):
 
 setup(
     name='ldt',
-    version=ldt.__version__,
+    version='0.1.0',
     url='http://ldtoolkit.space/',
     license='Apache Software License',
     author='Anna Rogers',
