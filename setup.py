@@ -1,37 +1,4 @@
-from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
-from setuptools.command.install import install as _install
-import io
-import codecs
-import os
-import sys
-
-here = os.path.abspath(os.path.dirname(__file__))
-
-packages = find_packages(here, exclude=["*.tests", "*.tests.*", "tests.*", "tests"])
-
-def read(*filenames, **kwargs):
-    encoding = kwargs.get('encoding', 'utf-8')
-    sep = kwargs.get('sep', '\n')
-    buf = []
-    for filename in filenames:
-        with io.open(filename, encoding=encoding) as f:
-            buf.append(f.read())
-    return sep.join(buf)
-
-long_description = read('README.rst', 'CHANGES.txt')
-requirements = read('requirements.txt')
-
-class PyTest(TestCommand):
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        import pytest
-        errcode = pytest.main(self.test_args)
-        sys.exit(errcode)
+from setuptools import setup
 
 setup(
     name='ldt',
@@ -44,11 +11,12 @@ setup(
                       "hurry.filesize", "timeout-decorator", "inflect",
                       "nltk", "vecto", "pandas", "pyenchant", "outdated",
                       "p_tqdm"],
-    cmdclass={'test': PyTest},# "install": Install},
+    # cmdclass={'test': PyTest},# "install": Install},
     author_email='anna_rogers@uml.edu',
     description='Linguistic diagnostics for word embeddings',
-    long_description=long_description,
-    packages=packages,
+    long_description='',
+    packages=['ldt', 'ldt.dicts', 'ldt.experiments', 'ldt.helpers',
+              'ldt.relations'],
     package_dir={"ldt":"ldt"},
     include_package_data=True,
     package_data={'ldt': ['test/sample_files/ldt-config.yaml']},
